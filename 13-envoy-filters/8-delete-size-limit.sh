@@ -1,0 +1,1 @@
+kubectl delete -f istio-setup/message-size-limit-filter.yaml;

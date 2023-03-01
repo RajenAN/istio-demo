@@ -1,0 +1,1 @@
+kubectl apply -f istio-setup/lua-filter.yaml;

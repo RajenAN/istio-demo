@@ -1,0 +1,12 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: least-conn-lb-wrapper
+spec:
+  host: istio-demo-wrapper
+  trafficPolicy:
+    loadBalancer:
+      simple: RANDOM
+      #The random load balancer selects a random healthy host. 
+      #The random load balancer generally performs better than round robin if no health checking policy is configured.
+      

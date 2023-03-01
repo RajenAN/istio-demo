@@ -1,0 +1,26 @@
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: tls-vs
+  namespace: default
+spec:
+  hosts:
+    - istio.demo
+  gateways:
+    - gateway-mutual
+  http:
+    - name: istio-demo    
+      match:
+      - uri:
+         prefix: /v1/istiodemo
+      route:
+        - destination:
+            host: istio-demo-v1-0
+            port:
+              number: 8080                               
+      headers:
+        response:
+           remove:
+             - x-envoy-upstream-service-time  
+           add:
+             testheader: test                         

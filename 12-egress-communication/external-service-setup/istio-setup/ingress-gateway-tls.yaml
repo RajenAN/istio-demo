@@ -1,0 +1,40 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: gateway-mutual
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: MUTUAL
+      credentialName: mutual-credential
+      minProtocolVersion: TLSV1_2
+    hosts:
+    - external.istiodemo
+---
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: tls-vs
+  namespace: default
+spec:
+  hosts:
+    - external.istiodemo
+  gateways:
+    - gateway-mutual
+  http:
+    - name: istio-demo
+      match:
+      - uri:
+         prefix: /v1/istiodemo
+      route:
+        - destination:
+            host: istio-demo-v1-1
+            port:
+              number: 8080
+          weight: 100           

@@ -1,0 +1,1 @@
+kubectl apply -f istio-setup/envoyfilter-ratelimit.yaml;

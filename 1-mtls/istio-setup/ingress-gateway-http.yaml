@@ -1,0 +1,36 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: http-gateway
+  namespace: default
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - istio.demo
+---
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: http-vs
+  namespace: default
+spec:
+  hosts:
+    - istio.demo
+  gateways:
+    - http-gateway
+  http:
+    - name: istio-demo    
+      match:
+      - uri:
+         prefix: /v1/istiodemo
+      route:
+        - destination:
+            host: istio-demo-v1-0
+            port:
+              number: 8080       

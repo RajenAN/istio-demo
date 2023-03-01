@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: circuit-breaker-wrapper
+spec:
+  host: istio-demo-wrapper
+  trafficPolicy:
+    outlierDetection:
+      consecutiveGatewayErrors: 3
+      consecutive5xxErrors: 3
+      interval: 1s
+      baseEjectionTime: 2m
+      maxEjectionPercent: 100   

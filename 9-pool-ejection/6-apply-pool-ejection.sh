@@ -1,0 +1,1 @@
+kubectl apply -f istio-setup/pool-ejection.yaml

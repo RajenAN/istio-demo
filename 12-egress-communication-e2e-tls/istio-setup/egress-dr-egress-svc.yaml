@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: external-istiodemo-egressgw
+spec:
+  host: istio-egressgateway.istio-system.svc.cluster.local
+  exportTo:
+  - '*'
+  subsets:
+  - name: external
+    trafficPolicy:
+      loadBalancer:
+        simple: ROUND_ROBIN
+      portLevelSettings:
+      - port:
+          number: 443
+        tls:
+          mode: ISTIO_MUTUAL
+          sni: external.istiodemo

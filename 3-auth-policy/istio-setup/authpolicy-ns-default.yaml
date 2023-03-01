@@ -1,0 +1,13 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: wrapper-namespace-policy
+spec:
+  selector:
+    matchLabels:
+      app: istio-demo-wrapper
+  action: DENY
+  rules:
+  - from:
+    - source:
+        notNamespaces: ["default"]

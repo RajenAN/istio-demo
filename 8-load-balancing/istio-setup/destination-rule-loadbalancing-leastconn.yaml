@@ -1,0 +1,11 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: least-conn-lb-wrapper
+spec:
+  host: istio-demo-wrapper
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_CONN
+      #The least request load balancer uses an O(1) algorithm 
+      #which selects two random healthy hosts and picks the host which has fewer active requests.

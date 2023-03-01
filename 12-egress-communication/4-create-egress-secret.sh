@@ -1,0 +1,1 @@
+kubectl create -n istio-system secret generic egress-mutual-credential --from-file=tls.key=external-service-setup/certs/client.istio.com.key --from-file=tls.crt=external-service-setup/certs/client.istio.com.crt --from-file=ca.crt=external-service-setup/certs/istio.com.crt;

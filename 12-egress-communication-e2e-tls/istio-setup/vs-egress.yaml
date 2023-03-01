@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: apic-egress-vs
+spec:
+  hosts:
+  - external.istiodemo
+  gateways:
+  - istio-egressgateway
+  - mesh
+  http:
+  - match:
+    - gateways:
+      - mesh
+      port: 8080
+    route:
+    - destination:
+        host: istio-egressgateway.istio-system.svc.cluster.local
+        subset: external
+        port:
+          number: 443
+      weight: 100  
+  - match:
+    - gateways:
+      - istio-egressgateway 
+      port: 443   
+    route:
+    - destination:
+        host: external.istiodemo
+        port: 
+          number: 32172
+
+      weight: 100  

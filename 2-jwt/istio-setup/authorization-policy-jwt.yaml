@@ -1,0 +1,20 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: wrapper
+spec:
+  selector:
+    matchLabels:
+      app: istio-demo-wrapper
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        requestPrincipals: ["istiodemo/istiodemo"]
+    when:
+    - key: request.auth.claims[service]
+      values: ["A"]           
+
+
+##eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhaXJ0ZWwiLCJzZXJ2aWNlIjoiZHRoIiwiaXNzIjoiYWlydGVsIn0.Uv0XFndgqYL_NPPwXLQzPr-B9DBEED9HqZyU4DSmrpvIz8RgP4E9PBZ9gtlPD5wqhw1Dxj5t_O5zVQUoN1QuWk4-io8dwl5AHen8vDvY5iItI_lcnTh_b9TMtG6xh0zT-w8c0AFHn1tQVJ3tyDW9-yPTWjtxCW1S7BhNsPAq_axa5StOAqrOgT0NCZIFJnky-MAiv1BJ_tSg8xeAs8LJfZym6SH4SNCfeCBq3Gd40NJU5y_9ctJrV41tNA1U_dW05j_KtT9DP0eEVArE3jHQNDE4hrynT_JF-GtJZsmB5PPVLLZKDRgWp856G2uEg6yJ51iihQJpQSs8HSHJYiTaFw
+      

@@ -1,0 +1,1 @@
+fortio load -quiet -c 5 -qps 0 -n 50 -timeout 8000ms -k https://istio.demo/v1/istiodemowrapper

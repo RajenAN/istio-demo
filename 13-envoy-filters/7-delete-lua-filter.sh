@@ -1,0 +1,1 @@
+kubectl delete -f istio-setup/lua-filter.yaml;

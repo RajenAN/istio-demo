@@ -1,0 +1,19 @@
+apiVersion: "security.istio.io/v1beta1"
+kind: "RequestAuthentication"
+metadata:
+  name: wrapper
+spec:
+  selector:
+    matchLabels:
+      app: istio-demo-wrapper
+  jwtRules:
+  - issuer: "istiodemo"
+    #jwksUri: "https://raw.githubusercontent.com/istio/istio/release-1.7/security/tools/jwt/samples/jwks.json"
+    jwks: '{"keys":[{
+    "kty": "RSA",
+    "e": "AQAB",
+    "use": "sig",
+    "kid": "be22MZtTyJL-rNqiGD55-c0zD89Vb40THSDjK39kvik",
+    "alg": "RS256",
+    "n": "r6OmCzknztdesMDZMdJA3ljYJhj5_SH2CikJ5HX6tcFvndIR3aOGvGQBDSHynepwZmhz_M1LI-it93AYtt0LI5RpxRNjqXz2AgBzMKZHvni9Ts42NbNV6YVOZZsu2oSz8wXsI-1O7D6fHivlAJFBv58mqA1_jwYgGfg36vYL3PmD_pJKMOXwn0okly9I5otFXUvEqjtwmr3Ac0qUggGO8bKHzbIsGCGS0uz_D6xTat9nyQNG_X1qs6HghP8Dj9eKy-H6hDPq0Uo1T4fXhs1OKKbE8iV00FM9xwfGopUzdulk3Ej_1RGUUBL2XKaVjBcUH0oyRPwh4cx_UmL3f-Lmgw"
+}]}'
